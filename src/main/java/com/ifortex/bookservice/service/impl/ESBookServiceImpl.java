@@ -40,7 +40,8 @@ public class ESBookServiceImpl implements BookService {
 
   @Override
   public List<Book> getAllByCriteria(SearchCriteria searchCriteria) {
-    // will be implemented shortly
-    return List.of();
+    ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+    BookDao bookDao = context.getBean(BookDao.class);
+    return bookDao.findByCriteria(searchCriteria);
   }
 }
