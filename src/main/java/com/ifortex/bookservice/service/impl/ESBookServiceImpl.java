@@ -42,6 +42,8 @@ public class ESBookServiceImpl implements BookService {
   public List<Book> getAllByCriteria(SearchCriteria searchCriteria) {
     ApplicationContext context = ApplicationContextProvider.getApplicationContext();
     BookDao bookDao = context.getBean(BookDao.class);
-    return bookDao.findByCriteria(searchCriteria);
+    return bookDao.findByCriteria(searchCriteria).stream()
+            .sorted(Comparator.comparing(Book::getPublicationDate))
+            .toList();
   }
 }
