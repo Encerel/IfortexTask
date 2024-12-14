@@ -17,11 +17,11 @@ public class ESBookServiceImpl implements BookService {
 
   @Override
   public Map<String, Long> getBooks() {
-    ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-    BookDao bookDao = context.getBean(BookDao.class);
-    List<Book> books = bookDao.findAll();
-    Map<String, Long> countBooksByGenre = new HashMap<>();
-    for (Book book : books) {
+    var context = ApplicationContextProvider.getApplicationContext();
+    var bookDao = context.getBean(BookDao.class);
+    var books = bookDao.findAll();
+    var countBooksByGenre = new HashMap<String, Long>();
+    for (var book : books) {
       for (var genre : book.getGenres()) {
         countBooksByGenre.compute(genre, (k, frequency) -> frequency == null ? 1 : frequency + 1);
       }
@@ -40,8 +40,8 @@ public class ESBookServiceImpl implements BookService {
 
   @Override
   public List<Book> getAllByCriteria(SearchCriteria searchCriteria) {
-    ApplicationContext context = ApplicationContextProvider.getApplicationContext();
-    BookDao bookDao = context.getBean(BookDao.class);
+    var context = ApplicationContextProvider.getApplicationContext();
+    var bookDao = context.getBean(BookDao.class);
     return bookDao.findByCriteria(searchCriteria);
   }
 }

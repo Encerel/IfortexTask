@@ -15,14 +15,15 @@ public class ESMemberServiceImpl implements MemberService {
 
     @Override
     public Member findMember() {
-        ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+        var context = ApplicationContextProvider.getApplicationContext();
         var memberDao = context.getBean(MemberDao.class);
         return memberDao.findMemberByOldestRomanceBookAndRecentRegistration();
     }
 
     @Override
     public List<Member> findMembers() {
-        // will be implemented shortly
-        return List.of();
+        var context = ApplicationContextProvider.getApplicationContext();
+        var memberDao = context.getBean(MemberDao.class);
+        return memberDao.findMembersRegisteredIn2023WithNoBooksRead();
     }
 }
