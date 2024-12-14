@@ -1,6 +1,6 @@
 package com.ifortex.bookservice.service.impl;
 
-import com.ifortex.bookservice.BookDao.MemberDao;
+import com.ifortex.bookservice.dao.MemberDao;
 import com.ifortex.bookservice.model.Member;
 import com.ifortex.bookservice.service.MemberService;
 import com.ifortex.bookservice.util.ApplicationContextProvider;

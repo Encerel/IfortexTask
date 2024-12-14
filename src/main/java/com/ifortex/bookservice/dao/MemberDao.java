@@ -1,4 +1,4 @@
-package com.ifortex.bookservice.BookDao;
+package com.ifortex.bookservice.dao;
 
 import com.ifortex.bookservice.model.Member;
 import jakarta.persistence.EntityManager;

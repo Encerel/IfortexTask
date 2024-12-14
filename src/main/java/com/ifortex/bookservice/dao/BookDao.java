@@ -1,4 +1,4 @@
-package com.ifortex.bookservice.BookDao;
+package com.ifortex.bookservice.dao;
 
 import com.ifortex.bookservice.dto.SearchCriteria;
 import com.ifortex.bookservice.model.Book;
@@ -28,17 +28,17 @@ public class BookDao {
 
         if (searchCriteria.getTitle() != null && !searchCriteria.getTitle().isBlank()) {
             String title = searchCriteria.getTitle().strip();
-            predicate = cb.and(predicate, cb.like(book.get("title"), "%" + title + "%"));
+            predicate = cb.and(predicate, cb.like(book.get("title"), formatAsLikeExpression(title)));
         }
 
         if (searchCriteria.getDescription() != null && !searchCriteria.getDescription().isBlank()) {
             String description = searchCriteria.getDescription().strip();
-            predicate = cb.and(predicate, cb.like(book.get("description"), "%" + description + "%"));
+            predicate = cb.and(predicate, cb.like(book.get("description"), formatAsLikeExpression(description)));
         }
 
         if (searchCriteria.getAuthor() != null && !searchCriteria.getAuthor().isBlank()) {
             String author = searchCriteria.getAuthor().strip();
-            predicate = cb.and(predicate, cb.like(book.get("author"), "%" + author + "%"));
+            predicate = cb.and(predicate, cb.like(book.get("author"), formatAsLikeExpression(author)));
         }
 
         if (searchCriteria.getYear() != null) {
@@ -52,12 +52,16 @@ public class BookDao {
             Expression<String> genresAsString = cb.function("array_to_string", String.class,
                     book.get("genres"), cb.literal(",")
             );
-            predicate = cb.and(predicate, cb.like(genresAsString, "%" + genre + "%"));
+                predicate = cb.and(predicate, cb.like(genresAsString, formatAsLikeExpression(genre)));
 
         }
 
         query.select(book).where(predicate);
         return entityManager.createQuery(query).getResultList();
+    }
+
+    private String formatAsLikeExpression(String criteria) {
+        return "%" + criteria + "%";
     }
 
 

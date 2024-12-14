@@ -1,6 +1,6 @@
 package com.ifortex.bookservice.service.impl;
 
-import com.ifortex.bookservice.BookDao.BookDao;
+import com.ifortex.bookservice.dao.BookDao;
 import com.ifortex.bookservice.dto.SearchCriteria;
 import com.ifortex.bookservice.model.Book;
 import com.ifortex.bookservice.service.BookService;
