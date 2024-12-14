@@ -1,7 +1,10 @@
 package com.ifortex.bookservice.service.impl;
 
+import com.ifortex.bookservice.BookDao.MemberDao;
 import com.ifortex.bookservice.model.Member;
 import com.ifortex.bookservice.service.MemberService;
+import com.ifortex.bookservice.util.ApplicationContextProvider;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,15 +13,16 @@ import java.util.List;
 @Service
 public class ESMemberServiceImpl implements MemberService {
 
-  @Override
-  public Member findMember() {
-    // will be implemented shortly
-    return null;
-  }
+    @Override
+    public Member findMember() {
+        ApplicationContext context = ApplicationContextProvider.getApplicationContext();
+        var memberDao = context.getBean(MemberDao.class);
+        return memberDao.findMemberByOldestRomanceBookAndRecentRegistration();
+    }
 
-  @Override
-  public List<Member> findMembers() {
-    // will be implemented shortly
-    return List.of();
-  }
+    @Override
+    public List<Member> findMembers() {
+        // will be implemented shortly
+        return List.of();
+    }
 }
